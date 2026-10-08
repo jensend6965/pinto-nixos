@@ -7,6 +7,6 @@ let
 in
 {
   umbriel = inputs.umbriel.packages.${system}.default.override {
-    inherit (prev) xwayland-satellite;
+    inherit (prev) xwayland;
   };
 }
