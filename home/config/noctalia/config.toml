@@ -3,7 +3,7 @@ order = [ "default" ]
 
     [bar.default]
     background_opacity = 0.84999998100101948
-    capsule_radius = 0
+    capsule_radius = "auto"
     center = [ "taskbar" ]
     concave_edge_corners = false
     end = [ "summary_2", "tray", "clock", "notifications" ]
@@ -258,7 +258,8 @@ type = "tmelik/system-monitor:summary"
 
 [widget.taskbar]
 anchor = true
-font_family = "JetBrainsMono NF"
+capsule_radius = "auto"
+font_family = "Maple Mono Normal"
 font_scale = 2.0
 font_weight = 400
 group_by_workspace = true
