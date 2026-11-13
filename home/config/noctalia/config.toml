@@ -1,49 +1,69 @@
-[bar.default]
-background_opacity = 0.84999998100101948
-capsule_radius = 0
-center = []
-concave_edge_corners = false
-end = [
-    "summary",
-    "divider",
-    "tray",
-    "divider",
-    "recorder",
-    "wallhaven",
-    "network",
-    "volume",
-    "notifications",
-    "divider",
-    "clock"
-]
-font_family = "JetBrainsMono NF"
-font_weight = 400
-margin_ends = 0
-radius = 0
-start = [ "workspaces", "divider", "active_window", "audio_visualizer" ]
+[bar]
+order = [ "default" ]
+
+    [bar.default]
+    background_opacity = 0.84999998100101948
+    capsule_radius = 5
+    center = [
+        "audio_visualizer",
+        "clock",
+        "divider-left",
+        "tray",
+        "divider-left",
+        "summary",
+        "divider-left",
+        "taskbar",
+        "divider-right",
+        "indicator",
+        "divider-right",
+        "media",
+        "divider-right",
+        "active_window",
+        "audio_visualizer"
+    ]
+    concave_edge_corners = false
+    end = []
+    font_family = "JetBrainsMono NF"
+    margin_ends = 700
+    radius_top_left = 0
+    radius_top_right = 0
+    start = []
+    widget_spacing = 10
+
+[[control_center.shortcuts]]
+type = "power_profile"
+
+[[control_center.shortcuts]]
+type = "noctalia/screen_recorder:toggle"
+
+[[control_center.shortcuts]]
+type = "weather"
+
+[[control_center.shortcuts]]
+type = "audio"
+
+[[control_center.shortcuts]]
+type = "mic_mute"
+
+[[control_center.shortcuts]]
+type = "clipboard"
+
+[desktop_widgets]
+enabled = false
 
 [dock]
-auto_hide = true
 background_opacity = 0.84999998100101948
 concave_edge_corners = false
-enabled = true
-icon_size = 36
+cross_axis_padding = 4
+enabled = false
+icon_size = 44
+inactive_opacity = 0.9499999787658453
 launcher_position = "start"
-pinned = [
-    "thunar",
-    "chromium-browser",
-    "discord",
-    "spotify",
-    "kitty",
-    "dev.zed.Zed",
-    "steam",
-    "io.github.Faugus.faugus-launcher",
-    "zapzap"
-]
-radius = 7
+magnification_scale = 1.5000000074505806
+main_axis_padding = 10
+pinned = [ "thunar", "firefox", "equibop", "steam", "spotify-launcher", "dev.zed.Zed" ]
 radius_bottom_left = 0
 radius_bottom_right = 0
-reserve_space = false
 show_dots = true
 
 [location]
@@ -52,26 +72,53 @@ address = "Ho Chi Minh"
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
-widget_order = [ "lockscreen-login-box@HDMI-A-1" ]
+widget_order = [ "lockscreen-login-box@Virtual-virtual-xdp-kde-discord", "lockscreen-login-box@DP-2" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
     major_interval = 4
     visible = true
 
-    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-2"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 1280.0
+    cy = 898.0
+    output = "DP-2"
+    placement_height = 1080.0
+    placement_width = 2560.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-2".settings]
+        background_color = "surface_container"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@Virtual-virtual-xdp-kde-discord"]
     box_height = 196.0
     box_width = 810.0
     cx = 960.0
     cy = 898.0
-    output = "HDMI-A-1"
+    output = "Virtual-virtual-xdp-kde-discord"
     placement_height = 1080.0
     placement_width = 1920.0
     rotation = 0.0
     type = "login_box"
 
-        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
-        background_color = "surface_variant"
+        [lockscreen_widgets.widget."lockscreen-login-box@Virtual-virtual-xdp-kde-discord".settings]
+        background_color = "surface_container"
         background_opacity = 0.88
         background_radius = 12.0
         center_password_text = false
@@ -88,23 +135,27 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1" ]
 
 [notification]
 background_opacity = 0.84999998100101948
-history_retention_hours = 72
-max_visible = 2
+position = "top_center"
 
 [osd]
 background_opacity = 0.84999998100101948
-offset_y = 100
-position = "bottom_center"
-position_vertical = "bottom_center"
-
-[plugins]
-enabled = [ "noctalia/wallhaven", "tmelik/system-monitor", "noctalia/screen_recorder" ]
 
 [shell]
-corner_radius_scale = 0.0
 font_family = "JetBrainsMono NF"
 polkit_agent = true
-telemetry_enabled = true
+
+    [shell.launcher]
+    categories = false
+    layout = "simple"
+    pinned = [
+        "dev.kineticwe.Settings",
+        "io.github.jensend6965.Embr",
+        "spotify-launcher",
+        "discord",
+        "firefox",
+        "com.nousresearch.hermes",
+        "feishin"
+    ]
 
     [shell.panel]
     control_center_placement = "floating"
@@ -112,70 +163,103 @@ telemetry_enabled = true
     transparency_mode = "soft"
     wallpaper_placement = "floating"
 
+    [shell.window_switcher]
+    mru = true
+
 [theme]
-builtin = "Gruvbox"
-community_palette = "Cherry Blossom"
+builtin = "Tokyo-Night"
+community_palette = "Catppuccin Frappe Blue"
 mode = "dark"
 source = "builtin"
-wallpaper_scheme = "dysfunctional"
+wallpaper_scheme = "m3-content"
 
     [theme.templates]
-    builtin_ids = [ "btop", "gtk3", "gtk4", "kitty", "qt", "umbriel" ]
-    community_ids = [ "obsidian", "zed", "steam", "fastfetch" ]
+    builtin_ids = [ "alacritty", "btop", "gtk3", "gtk4", "kcolorscheme", "kineticwe", "kitty", "qt" ]
+    community_ids = [ "brave-origin", "pywalfox" ]
 
 [wallpaper.default]
-path = "@wallpaper@"
+path = "/home/jensend/Pictures/1354305.jpeg"
 
 [wallpaper.last]
-path = "@wallpaper@"
+path = "/home/jensend/Pictures/1354305.jpeg"
 
-[wallpaper.monitors.HDMI-A-1]
-path = "@wallpaper@"
+[wallpaper.monitors.DP-2]
+path = "/home/jensend/Pictures/1354305.jpeg"
 
 [widget.active_window]
 display = "text_only"
+max_length = 80
 show_empty_label = true
+title_scroll = "on_hover"
 
 [widget.audio_visualizer]
-centered = false
-mirrored = false
+bands = 10
+capsule_fill = "on_surface_variant"
+capsule_opacity = 0.14999999999999999
+capsule_radius = "auto"
+centered = true
+mirrored = true
 
 [widget.clock]
-anchor = true
+format = "{:%H:%M}"
 
-[widget.divider]
-color = "#5A595A"
+[widget.divider-left]
+color = "#BDBDBD"
 interactive = false
-text = "|"
+text = "\\"
 type = "text"
+
+[widget.divider-right]
+color = "#BDBDBD"
+interactive = false
+text = "/"
+type = "text"
+
+[widget.media]
+max_length = 80
 
 [widget.network]
 show_label = false
+
+[widget.notifications]
+hide_when_no_unread = false
 
 [widget.recorder]
 type = "noctalia/screen_recorder:recorder"
 
 [widget.summary]
-show_cpu_details_in_tooltip = true
 show_cpu_usage = false
 show_disk = false
 show_download = false
+show_gpu_temperature = "on"
 show_gpu_usage = "off"
 show_gpu_vram = "off"
 show_ram = false
 show_separators = false
 show_swap = false
-show_top_processes = false
 show_upload = false
 type = "tmelik/system-monitor:summary"
+
+[widget.taskbar]
+anchor = true
+group_by_workspace = true
+group_single_icon_per_app = true
+hide_empty_workspaces = true
+minimal = true
+show_all_outputs = true
+workspace_label_placement = "inside"
+
+[widget.tray]
+detached_panel = true
+drawer = true
+match_adjacent_spacing = true
+pinned = [ "Fcitx", "Discord", "embr", "equibop" ]
 
 [widget.volume]
 show_label = false
 
-[widget.wallhaven]
-type = "noctalia/wallhaven:wallhaven"
-
 [widget.workspaces]
-focused_color = "#11A363"
-label_source = "name"
-max_label_chars = 5
+anchor = false
+empty_color = "shadow"
+occupied_color = "surface_container"
+style = "regular"

@@ -1,93 +1,119 @@
-#Active/Inactive windows opacity
-[[window_rule]]
-match.is_focused = false
-opacity = 0.8
-blur = true
-blur_optimized = true
+# ==============================================================================
+# Window rules
+# Rules combine in order, with later values overriding earlier ones.
+# https://docs.noctalia.dev/umbriel/window-rules/
 
+# Blur windows over the cached wallpaper blur. Set blur_optimized = false to
+# include overlapping windows behind them, at a GPU cost on every frame that
+# moves anything behind them.
 [[window_rule]]
-match.is_focused = true
-opacity = 1.0
-blur = false
-
-# Keep Kitty's own background transparency without fading its text.
-[[window_rule]]
-match.app_id = "^kitty$"
-opacity = 1.0
-blur = true
-
-#Portals and settings
-[[window_rule]]
-match.app_id = "^(dev.noctalia.Noctalia|xdg-desktop-portal-gtk)$"
+match.app_id = "^dev.noctalia.Noctalia$"
 default_floating = true
-default_floating_size_px = { width = 1020, height = 900 }
+default_floating_size_px = { width = 1280, height = 920 }
 
 [[window_rule]]
 match.app_id = "^dev.noctalia.UmbrielSharePicker$"
 default_floating = true
 default_floating_size_px = { width = 800, height = 600 }
 
-#Thunar
 [[window_rule]]
-match.app_id = "thunar"
-match.title = "^(File Operation Progress|Confirm to replace files)$"
+match.title = "^(Picture-in-Picture|Picture in picture)$"
 default_floating = true
-default_floating_size_px = { width = 600, height = 100 }
+default_maximize = false
+default_position = { x = 20, y = 20, anchor = "bottom_right" }
 
-### Steam
-# Games
 [[window_rule]]
-match.app_id = "^steam_app_.*$"
-opacity = 1.0
-blur = false
-default_floating = true
-default_floating_size_px = { width = 1280, height = 720 }
-default_focused = true
-default_position = { x = 0, y = 0 }
-default_workspace = 3
-
-# settings
-[[window_rule]]
-match.app_id = "^steam$"
-match.title = "Steam Settings"
-default_floating = true
-
-# Steam notification toasts
-[[window_rule]]
-match.title = "^notificationtoasts_.+_desktop"
+match.title = ["^notificationtoasts_.+_desktop", "File Operation Progress"]
 default_position = { x = 0, y = 0, anchor = "bottom_right" }
 default_focused = false
 default_pinned = true
 
-#Picture in Picture window_rule
+# Keep game menus inside their window; a focus or workspace keybind releases the pointer.
 [[window_rule]]
-match.title = "^(?:Picture[ _-]in[ _-][Pp]icture|.+['’]s Stream)$"
-opacity = 1.0
-blur = false
-default_floating = true
-default_floating_size_px = { width = 480, height = 270 }
-default_pinned = true
-default_focused = false
-default_position = { x = 8, y = 8, anchor = "top_right" }
+match.app_id = "^steam_app_.*$"
+confine_pointer = true
 
-#workspace-2 apps
+# Keep compositor shortcuts available while a virtual machine window is focused.
 [[window_rule]]
-match.app_id = "^(equibop|discord|Spotify|com.pocoguy.Muse)$"
-default_workspace = 2
+match.app_id = "^virt-manager$"
+allow_shortcuts_inhibit = false
 
-#workspace-3 apps
+#Blur all windows
 [[window_rule]]
-match.app_id = "^(heroic|steam|io.github.Faugus.faugus-launcher)$"
-default_workspace = 3
+match.is_focused = false
+opacity = 0.85
+blur = true
 
-#workspace-5 apps
 [[window_rule]]
-match.app_id = "^dev.zed.Zed$"
-default_workspace = 5
+match.is_focused = true
+opacity = 0.95
+blur = true
 
-#Startup rules
+# Keep an application drawing while it is hidden on another workspace, for programs whose other work stalls without it.
+# [[window_rule]]
+# match.app_id = "^obs$"
+# background_render = true
+
+# Keep matching windows visible locally but absent from screenshots and recordings.
+# See docs/user/window-rules.md#capture-protection.
+# [[window_rule]]
+# match.app_id = "^private-app$"
+# block_capture = true
+
+# Keep one application's modal dialogs as ordinary windows.
+# [[window_rule]]
+# match.app_id = "^gimp"
+# match.is_dialog = true
+# attach_to_parent = false
+
+# Named scratchpads can launch an application when toggled while empty.
+# [[scratchpad]]
+# name = "music"
+# spawn_when_empty = "spotify"
+
+# [[window_rule]]
+# match.app_id = "^spotify$"
+# default_scratchpad = "music"
+
+# Give scratchpad windows their own border colors.
+# [[window_rule]]
+# match.is_scratchpad = true
+# border_color_focused = "#E5C07BFF"
+# border_color_unfocused = "#5C4A2AFF"
+
+# Hide enabled title bars only while a window is maximized to edges.
+# [[window_rule]]
+# match.is_maximized_to_edges = true
+# title_bar = "off"
+
+# Frame the window being screencast; viewers never see the frame.
+# [[window_rule]]
+# match.is_cast_target = true
+# border_color_focused = "#40C057FF"
+# border_color_unfocused = "#40C057FF"
+
+# Leave an application that draws its own corners and shadow undecorated.
+# [[window_rule]]
+# match.app_id = "^org[.]gnome[.]TextEditor$"
+# border_width = 0
+# corner_radius = 0
+# shadow = false
+
+# Open apps on specific workspaces
 [[window_rule]]
-match.app_id = "^(discord|Spotify|solaar|steam)$"
-default_focused = false
-match.at_startup = true
-focus_on_activate = false
+match.app_id = ["^discord$", "^feishin$"]
+default_workspace = "chill"
+
+[[window_rule]]
+match.app_id = "^steam$"
+default_workspace = "game"
+
+[[window_rule]]
+match.app_id = ["^steam_app_.*$", "Halls of Torment"]
+default_workspace = "game"
+default_maximize = true
+opacity = 1.00
+
+[[window_rule]]
+match.app_id = "^zen$"
+default_workspace = "main"
