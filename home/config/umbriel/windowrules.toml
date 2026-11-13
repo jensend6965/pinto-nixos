@@ -41,12 +41,12 @@ allow_shortcuts_inhibit = false
 #Blur all windows
 [[window_rule]]
 match.is_focused = false
-opacity = 0.85
+opacity = 0.9
 blur = true
 
 [[window_rule]]
 match.is_focused = true
-opacity = 0.95
+opacity = 0.98
 blur = true
 
 # Keep an application drawing while it is hidden on another workspace, for programs whose other work stalls without it.

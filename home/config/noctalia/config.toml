@@ -3,31 +3,15 @@ order = [ "default" ]
 
     [bar.default]
     background_opacity = 0.84999998100101948
-    capsule_radius = 5
-    center = [
-        "audio_visualizer",
-        "clock",
-        "divider-left",
-        "tray",
-        "divider-left",
-        "summary",
-        "divider-left",
-        "taskbar",
-        "divider-right",
-        "indicator",
-        "divider-right",
-        "media",
-        "divider-right",
-        "active_window",
-        "audio_visualizer"
-    ]
+    capsule_radius = 0
+    center = [ "taskbar" ]
     concave_edge_corners = false
-    end = []
-    font_family = "JetBrainsMono NF"
-    margin_ends = 700
+    end = [ "summary_2", "tray", "clock", "notifications" ]
+    font_family = "Maple Mono Normal"
+    margin_ends = 646
     radius_top_left = 0
     radius_top_right = 0
-    start = []
+    start = [ "bar", "active_window", "audio_visualizer" ]
     widget_spacing = 10
 
 [[control_center.shortcuts]]
@@ -140,8 +124,11 @@ position = "top_center"
 [osd]
 background_opacity = 0.84999998100101948
 
+[plugins]
+enabled = [ "noctalia/screen_recorder", "tmelik/system-monitor", "noctalia/umbriel-companion" ]
+
 [shell]
-font_family = "JetBrainsMono NF"
+font_family = "Maple Mono Normal"
 polkit_agent = true
 
     [shell.launcher]
@@ -154,7 +141,11 @@ polkit_agent = true
         "discord",
         "firefox",
         "com.nousresearch.hermes",
-        "feishin"
+        "feishin",
+        "zen",
+        "dev.zed.Zed",
+        "com.discordapp.Discord",
+        "org.jeffvli.feishin"
     ]
 
     [shell.panel]
@@ -174,17 +165,25 @@ source = "builtin"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
-    builtin_ids = [ "alacritty", "btop", "gtk3", "gtk4", "kcolorscheme", "kineticwe", "kitty", "qt" ]
-    community_ids = [ "brave-origin", "pywalfox" ]
+    builtin_ids = [ "alacritty", "btop", "gtk3", "gtk4", "kcolorscheme", "kitty", "qt", "umbriel" ]
+    community_ids = [ "feishin", "zen-browser", "fastfetch" ]
 
-[wallpaper.default]
-path = "/home/jensend/Pictures/1354305.jpeg"
+[wallpaper]
+directory = "~/Pictures/Wallpapers"
+transition_on_startup = true
 
-[wallpaper.last]
-path = "/home/jensend/Pictures/1354305.jpeg"
+    [wallpaper.automation]
+    enabled = true
+    interval_seconds = 3600
 
-[wallpaper.monitors.DP-2]
-path = "/home/jensend/Pictures/1354305.jpeg"
+    [wallpaper.default]
+    path = "/home/jensend/Pictures/Wallpapers/maligne-lake-from-spirit-island-jasper-national-park-backiee-4K.jpg"
+
+    [wallpaper.last]
+    path = "/home/jensend/Pictures/Wallpapers/maligne-lake-from-spirit-island-jasper-national-park-backiee-4K.jpg"
+
+    [wallpaper.monitors.DP-2]
+    path = "/home/jensend/Pictures/Wallpapers/maligne-lake-from-spirit-island-jasper-national-park-backiee-4K.jpg"
 
 [widget.active_window]
 display = "text_only"
@@ -197,8 +196,12 @@ bands = 10
 capsule_fill = "on_surface_variant"
 capsule_opacity = 0.14999999999999999
 capsule_radius = "auto"
-centered = true
-mirrored = true
+centered = false
+mirrored = false
+
+[widget.bar]
+show_layout_name = true
+type = "noctalia/umbriel-companion:bar"
 
 [widget.clock]
 format = "{:%H:%M}"
@@ -240,8 +243,24 @@ show_swap = false
 show_upload = false
 type = "tmelik/system-monitor:summary"
 
+[widget.summary_2]
+show_cpu_usage = false
+show_disk = false
+show_download = false
+show_gpu_temperature = "on"
+show_gpu_usage = "off"
+show_gpu_vram = "off"
+show_ram = false
+show_separators = false
+show_swap = false
+show_upload = false
+type = "tmelik/system-monitor:summary"
+
 [widget.taskbar]
 anchor = true
+font_family = "JetBrainsMono NF"
+font_scale = 2.0
+font_weight = 400
 group_by_workspace = true
 group_single_icon_per_app = true
 hide_empty_workspaces = true
